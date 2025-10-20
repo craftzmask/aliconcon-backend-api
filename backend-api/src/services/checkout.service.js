@@ -3,9 +3,9 @@
 const { NotFoundError, BadRequestError } = require("../core/error.response");
 const CartRepo = require("../models/repositories/cart.repo");
 const ProductRepo = require("../models/repositories/product.repo");
-const DiscountService = require("../services/discount.service");
+const DiscountService = require("./discount.service");
 const OrderModel = require("../models/order.model");
-const RedisService = require("../services/redis.service");
+const RedisService = require("./redis.service");
 
 /**
   {
