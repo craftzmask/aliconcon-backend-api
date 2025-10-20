@@ -18,6 +18,7 @@ router.use("/v1/api/discounts", require("./discount"));
 router.use("/v1/api/comments", require("./comment"));
 router.use("/v1/api/carts", require("./cart"));
 router.use("/v1/api/products", require("./product"));
+router.use("/v1/api/upload", require("./upload"));
 router.use("/v1/api/checkout", require("./checkout"));
 router.use("/v1/api/shops", require("./access"));
 
