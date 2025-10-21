@@ -2,12 +2,15 @@
 
 const express = require("express");
 const router = express.Router();
-const { authentication } = require("../../auth/authUtils");
 const asyncErrorHandler = require("../../helpers/asyncErrorHandler");
 const UploadController = require("../../controllers/upload.controller");
-
-// router.use(authentication);
+const { uploadFromDisk } = require("../../config/multer.config");
 
 router.post("/product", asyncErrorHandler(UploadController.uploadImageFromUrl)); // may use productId here
+router.post(
+  "/product/thumb",
+  uploadFromDisk.single("file"),
+  asyncErrorHandler(UploadController.uploadImageFromLocal)
+);
 
 module.exports = router;
