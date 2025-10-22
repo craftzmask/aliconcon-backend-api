@@ -12,5 +12,10 @@ router.post(
   uploadFromDisk.single("file"),
   asyncErrorHandler(UploadController.uploadImageFromLocal)
 );
+router.post(
+  "/product/multi-thumb",
+  uploadFromDisk.array("files", 9),
+  asyncErrorHandler(UploadController.uploadMultipleImagesFromLocal)
+);
 
 module.exports = router;

@@ -18,10 +18,10 @@ const uploadImageFromUrl = async () => {
   }
 };
 
-const uploadImageFromLocal = async ({ path, folderName = "products/0000" }) => {
+const uploadImageFromLocal = async ({ file, folderName = "products/0000" }) => {
   try {
-    const uploadResult = await cloudinary.uploader.upload(path, {
-      public_id: "thumb",
+    const uploadResult = await cloudinary.uploader.upload(file.path, {
+      public_id: file.originalname,
       folder: folderName,
     });
 
@@ -39,6 +39,26 @@ const uploadImageFromLocal = async ({ path, folderName = "products/0000" }) => {
   }
 };
 
-const UploadService = { uploadImageFromUrl, uploadImageFromLocal };
+const uploadMultipleImagesFromLocal = async ({
+  files,
+  folderName = "products/0000",
+}) => {
+  try {
+    const uploaded = [];
+    for (const file of files) {
+      const result = await uploadImageFromLocal({ file, folderName });
+      uploaded.push(result);
+    }
+    return uploaded;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const UploadService = {
+  uploadImageFromUrl,
+  uploadImageFromLocal,
+  uploadMultipleImagesFromLocal,
+};
 
 module.exports = UploadService;
