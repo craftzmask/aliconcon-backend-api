@@ -37,10 +37,24 @@ const uploadMultipleImagesFromLocal = async (req, res) => {
   }).send(res);
 };
 
+const uploadImageFromLocalS3 = async (req, res) => {
+  if (!req.file) {
+    throw new BadRequestError("Missing File");
+  }
+
+  OK({
+    message: "Upload local image successfully",
+    metadata: await UploadService.uploadImageFromLocalS3({
+      file: req.file,
+    }),
+  }).send(res);
+};
+
 const UploadController = {
   uploadImageFromUrl,
   uploadImageFromLocal,
   uploadMultipleImagesFromLocal,
+  uploadImageFromLocalS3,
 };
 
 module.exports = UploadController;

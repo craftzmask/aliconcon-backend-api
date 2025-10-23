@@ -18,4 +18,11 @@ router.post(
   asyncErrorHandler(UploadController.uploadMultipleImagesFromLocal)
 );
 
+// S3
+router.post(
+  "/product/bucket",
+  uploadFromDisk.single("file"),
+  asyncErrorHandler(UploadController.uploadImageFromLocalS3)
+);
+
 module.exports = router;
