@@ -1,7 +1,14 @@
 "use strict";
 
+const crypto = require("crypto");
+const fs = require("fs");
 const cloudinary = require("../config/cloudinary.config");
-const { s3Client, PutObjectCommand } = require("../config/s3.config");
+const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
+const {
+  s3Client,
+  PutObjectCommand,
+  GetObjectCommand,
+} = require("../config/s3.config");
 const { AWS_BUCKET_NAME } = process.env;
 
 const uploadImageFromUrl = async () => {
@@ -58,15 +65,28 @@ const uploadMultipleImagesFromLocal = async ({
 };
 
 const uploadImageFromLocalS3 = async ({ file }) => {
-  const uploadParams = {
-    Bucket: AWS_BUCKET_NAME,
-    Key: file.originalname,
-    Body: file.buffer,
-    ContentType: "image/jpeg",
-  };
+  const imageName = randomName();
 
-  return await s3Client.send(new PutObjectCommand(uploadParams));
+  // upload image
+  await s3Client.send(
+    new PutObjectCommand({
+      Bucket: AWS_BUCKET_NAME,
+      Key: imageName,
+      Body: fs.createReadStream(file.path),
+      ContentType: file.mimetype,
+    })
+  );
+
+  // get signed url to access the uploaded image
+  const command = new GetObjectCommand({
+    Bucket: AWS_BUCKET_NAME,
+    Key: imageName,
+  });
+
+  return await getSignedUrl(s3Client, command, { expiresIn: 3600 });
 };
+
+const randomName = () => crypto.randomBytes(16).toString("hex");
 
 const UploadService = {
   uploadImageFromUrl,
