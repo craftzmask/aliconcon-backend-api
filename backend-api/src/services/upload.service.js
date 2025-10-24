@@ -11,12 +11,14 @@ const {
 } = require("../config/s3.config");
 const { AWS_BUCKET_NAME } = process.env;
 
+const randomName = () => crypto.randomBytes(16).toString("hex");
+
 const uploadImageFromUrl = async () => {
   try {
     const uploadResult = await cloudinary.uploader.upload(
       "https://res.cloudinary.com/demo/image/upload/getting-started/shoes.jpg",
       {
-        public_id: "shoes", // name of image
+        public_id: randomName(), // name of image
         folder: "products/0000", // folder where contains the image
       }
     );
@@ -30,7 +32,7 @@ const uploadImageFromUrl = async () => {
 const uploadImageFromLocal = async ({ file, folderName = "products/0000" }) => {
   try {
     const uploadResult = await cloudinary.uploader.upload(file.path, {
-      public_id: file.originalname,
+      public_id: randomName(),
       folder: folderName,
     });
 
@@ -85,8 +87,6 @@ const uploadImageFromLocalS3 = async ({ file }) => {
 
   return await getSignedUrl(s3Client, command, { expiresIn: 3600 });
 };
-
-const randomName = () => crypto.randomBytes(16).toString("hex");
 
 const UploadService = {
   uploadImageFromUrl,
