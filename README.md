@@ -257,7 +257,7 @@ aliconcon-backend-api-main/
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/craftzmask/aliconcon-backend-api
    cd aliconcon-backend-api-main
    ```
 
