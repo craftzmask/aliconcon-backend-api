@@ -281,8 +281,7 @@ aliconcon-backend-api-main/
 
    ```env
    # Server Configuration
-   PORT=3055
-   NODE_ENV=development
+   PORT=your-port
 
    # Database
    MONGODB_URI=mongodb://localhost:27017/ecommerce
@@ -294,18 +293,14 @@ aliconcon-backend-api-main/
    # RabbitMQ
    RABBITMQ_URL=amqp://localhost:5672
 
-   # JWT Secrets
-   JWT_ACCESS_SECRET=your-access-token-secret
-   JWT_REFRESH_SECRET=your-refresh-token-secret
-
    # AWS S3
    AWS_BUCKET_NAME=your-bucket-name
-   AWS_REGION=us-east-1
+   AWS_REGION=your-region
    AWS_ACCESS_KEY_ID=your-access-key
    AWS_SECRET_ACCESS_KEY=your-secret-key
 
    # Cloudinary
-   CLOUDINARY_CLOUD_NAME=your-cloud-name
+   CLOUDINARY_NAME=your-cloud-name
    CLOUDINARY_API_KEY=your-api-key
    CLOUDINARY_API_SECRET=your-api-secret
 
