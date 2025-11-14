@@ -859,17 +859,9 @@ volumes:
 ### Long-term
 
 - [ ] Microservices decomposition (separate services per domain)
-- [ ] Event sourcing and CQRS pattern
-- [ ] Kubernetes deployment
-- [ ] Multi-region deployment
-- [ ] Machine learning-based product recommendations
-- [ ] Advanced fraud detection
-- [ ] A/B testing infrastructure
 - [ ] Deployment using CI/CD
 - [ ] Refactor Repo
-- [ ] AI Agent Support
 - [ ] Chat Feature
-- [ ] Add Golang Upload Image Service
 - [ ] Implement Frontend using React
 - [ ] Implement e2e
 
